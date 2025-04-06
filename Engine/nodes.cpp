@@ -12,4 +12,11 @@ namespace {
         }
         TF_WARN("Could not convert value to Aqua type");
     }
+
+template<> float2 convertToAqua<float2>(const VtValue &value)
+    {
+        const GfVec2f convertedValue = convertToAqua<GfVec2f>(value);
+        return make_float2(convertedValue[0], convertedValue[1]);
+    }
+
 }
