@@ -18,5 +18,10 @@ template<> float2 convertToAqua<float2>(const VtValue &value)
         const GfVec2f convertedValue = convertToAqua<GfVec2f>(value);
         return make_float2(convertedValue[0], convertedValue[1]);
     }
-
+template<>float3 convertToAqua<float3>(const VtValue &value)
+    {
+        if(value.IsHolding<GfVec3f>()){
+            const GfVec3f convertedValue = value.UncheckedGet<GfVec3f>();
+        }
+    }
 }
