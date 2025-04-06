@@ -6,5 +6,10 @@ namespace {
         if (value.IsHolding<DstType>()){
             return value.UncheckedGet<DstType>();
         }
+        const VtValue castedValue = VtValue::Cast<DstType>(value);
+        if (castedValue.IsHolding<DstType>()) {
+            return castedValue.IsHolding<DstType>();
+        }
+        TF_WARN("Could not convert value to Aqua type");
     }
 }
