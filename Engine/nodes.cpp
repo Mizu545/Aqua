@@ -41,5 +41,9 @@ template<>float3 convertToAqua<float3>(const VtValue &value)
         TF_Warn("Could not convert VtValue to float3");
         return zero_float3();
     }
-    
+template<> ustring convertToAqua<ustring>(const VtValue &value)
+    {
+        if 
+    }
+
 }
