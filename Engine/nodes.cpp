@@ -29,5 +29,8 @@ template<>float3 convertToAqua<float3>(const VtValue &value)
             const GfVec4f convertedValue = Value.UncheckedGet<GfVec4f>()
             return make_float3(convertedValue[0], convertedValue[1], convertedValue[2]);
         }
+        if (value.CanCast<GfVec3f>()){
+            
+        }
     }
 }
