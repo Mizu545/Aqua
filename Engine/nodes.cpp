@@ -37,7 +37,7 @@ template<>float3 convertToAqua<float3>(const VtValue &value)
             return make_float3(convertedValue[0], convertedValue[1], convertedValue[2]);
         }
 
-        TF_Warn("Could not convert VtValue to float3");
+        TF_WARN("Could not convert VtValue to float3");
         return zero_float3();
     }
 template<> ustring convertToAqua<ustring>(const VtValue &value)
@@ -52,7 +52,18 @@ template<> ustring convertToAqua<ustring>(const VtValue &value)
             const SdfAssetPath &path = value.UncheckedGet<SdfAssetPath>();
             return ustring(path.GetResolvedPath());
         }
-        if 
+        if (value.CanCast<TfToken>()){
+            return convertToAqua<ustring>(VtValue::Cast<TfToken>(value));
+        }
+        if (value.CanCast<std::string>()){
+            return convertToAqua<ustring>(VtValue::Cast<std::string>(value));
+        }
+        if (value.CanCast<SdfAssetPath>()){
+            return convertToAqua<ustring>(VtValue::Cast<SdfAssetPath>(value));
+        }
+        
+        TF_WARN("Could not convert VtValue to ustring");
+        return ustring();
     }
 
 }
