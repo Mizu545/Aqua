@@ -33,5 +33,13 @@ template<>float3 convertToAqua<float3>(const VtValue &value)
             const GfVec3f convertedValue = VtValue::Cast<GfVec3f>(value).UncheckedGet<GfVec3f>();
             return make_float3(convertedValue[0], convertedValue[1], convertedValue[2]);
         }
+        if (value.CanCast<GfVec4f>()){
+            const GfVec4f convertedValue = VtValue::Cast<GfVec4f>(value).UncheckedGet<GfVec4f>();
+            return make_float3(convertedValue[0], convertedValue[1], convertedValue[2]);
+        }
+
+        TF_Warn("Could not convert VtValue to float3");
+        return zero_float3();
     }
+    
 }
