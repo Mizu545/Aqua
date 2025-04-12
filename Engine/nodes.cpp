@@ -65,5 +65,21 @@ template<> ustring convertToAqua<ustring>(const VtValue &value)
         TF_WARN("Could not convert VtValue to ustring");
         return ustring();
     }
-
+template<typename Matrix>
+Transform convertMatrixToAqua(
+    const typename std::enable_if<Matrix::numRows == 3 && Matrix::numColumns == 3, Matrix>::type&matrix)
+    {
+        return make_transform(matrix [0, 0,],
+                            matrix [1, 0],
+                            matrix [2, 0],
+                            0,
+                            matrix [0, 1],
+                            matrix [1, 1],
+                            matrix [2, 1],
+                            0
+                            matrix [0, 2],
+                            matrix [1, 2],
+                            matrix [2, 2],
+                            0);
+    }
 }
