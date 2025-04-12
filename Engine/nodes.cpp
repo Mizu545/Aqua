@@ -30,7 +30,8 @@ template<>float3 convertToAqua<float3>(const VtValue &value)
             return make_float3(convertedValue[0], convertedValue[1], convertedValue[2]);
         }
         if (value.CanCast<GfVec3f>()){
-            
+            const GfVec3f convertedValue = VtValue::Cast<GfVec3f>(value).UncheckedGet<GfVec3f>();
+            return make_float3(convertedValue[0], convertedValue[1], convertedValue[2]);
         }
     }
 }
