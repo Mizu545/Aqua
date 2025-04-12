@@ -69,7 +69,7 @@ template<typename Matrix>
 Transform convertMatrixToAqua(
     const typename std::enable_if<Matrix::numRows == 3 && Matrix::numColumns == 3, Matrix>::type&matrix)
     {
-        return make_transform(matrix [0, 0,],
+        return make_transform(matrix [0, 0],
                             matrix [1, 0],
                             matrix [2, 0],
                             0,
@@ -82,4 +82,22 @@ Transform convertMatrixToAqua(
                             matrix [2, 2],
                             0);
     }
+template<typename Matrix>
+Transform convertMatrixToAqua(
+    const typename std::enable_if<Matrix::numRows == 4 && Matrix::numColumns == 4, Matrix>::type&matrix)
+    {
+        return make_transfrom(matrix [0, 0],
+                            matrix [1, 0],
+                            matrix [2, 0],
+                            matrix [3, 0],
+                            matrix [0, 1],
+                            matrix [1, 1],
+                            matrix [2, 1],
+                            matrix [3, 1],
+                            matrix [0, 2],
+                            matrix [1, 2],
+                            matrix [2, 2],
+                            matrix [3, 2],);
+    }
+template<> Transform convertToAqua<Transform>(const VtValue &value)
 }
