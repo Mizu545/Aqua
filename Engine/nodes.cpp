@@ -42,6 +42,16 @@ template<>float3 convertToAqua<float3>(const VtValue &value)
     }
 template<> ustring convertToAqua<ustring>(const VtValue &value)
     {
+        if (value.IsHolding<TfToken>()){
+            return ustring(value.UncheckedGet<TfToken>().GetString());
+        }
+        if (value.IsHolding<std::string>()){
+            return ustring(value.UncheckedGet<std::string>());
+        }
+        if (value.IsHolding<SdfAssetPath>()){
+            const SdfAssetPath &path = value.UncheckedGet<SdfAssetPath>();
+            return ustring(path.GetResolvedPath());
+        }
         if 
     }
 
